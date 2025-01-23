@@ -1,0 +1,43 @@
+
+.popupDiv {
+    width: 290px;
+    padding: 17px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    position: absolute;
+    bottom: 75px;
+    right: 14px;
+    z-index: 999;
+}
+
+.popupDiv input[type="text"],
+.popupDiv input[type="datetime-local"],
+.set-value {
+    width: 96%;
+    padding: 7px;
+    margin: 6px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.popupDiv button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popupDiv button:hover {
+    background-color: #45a049;
+}
+
+.popupDiv label {
+    font-weight: bold;
+    font-size: 14px;
+}

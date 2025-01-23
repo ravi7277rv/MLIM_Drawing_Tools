@@ -1,0 +1,201 @@
+.map_view_div {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 61px);
+}
+
+.leaflet-div-icon {
+    width: 13px !important;
+    height: 13px !important;
+    background-color: #006aff; 
+    border-radius: 6px;
+    margin-left: -5px !important;
+    margin-top: -4px !important;
+}
+
+.leaflet-right{
+    display: flex !important;
+}
+
+.leaflet-right .leaflet-control {
+    display: flex;
+    
+}
+
+.lasso_label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lasso_text{
+    cursor: pointer;
+}
+
+.leaflet-bar {
+margin-right: 3px !important;
+}
+
+.leaflet-draw {
+    margin-right: 15.5rem !important;
+}
+
+.leaflet-draw-toolbar {
+    display: flex;
+    margin-top: 0 !important;
+    margin-left: 5px;
+}
+
+.leaflet-draw-actions {
+    margin-top: 35px !important;
+    margin-right: 2px !important;
+}
+
+.leaflet-touch .leaflet-right .leaflet-draw-actions {
+    right: 2px !important;
+}
+
+.export_div {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    background: none !important;
+    border-radius: 5px;
+    z-index: 999;
+}
+
+.export_inside_div {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: transparent !important;
+}
+
+.submit_workDiv {
+    position: absolute;
+    top: 37px;
+    right: 0px;
+    width: max-content;
+    height: max-content;
+    background: white;
+    box-shadow: 0 0 5px silver;
+    border: 1px solid silver;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.export_geojson {
+    position: relative;
+    width: max-content;
+    height: max-content;
+    margin: 5px;
+}
+
+.geojosn_inner_div {
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    top: 43px;
+    left: -5px;
+    background: white;
+    box-shadow: 0 0 5px silver;
+    border: 1px solid silver;
+}
+
+.save_to_database {
+    width: max-content;
+    height: max-content;
+    margin: 5px;
+}
+
+.submit_work_btn {
+    padding: 10px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.import_shape_file {
+    background-color: #0066cc;
+    color: white;
+    padding: 7px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.export-btn {
+    padding: 10px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.session_time_div {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 285px;
+    height: 30px;
+    background-color: rgb(0, 0, 0);
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    z-index: 999;
+}
+
+.session_remainder_text {
+    color: white;
+    padding-right: 5px;
+    padding-left: 14px;
+}
+
+.session_time_text {
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.leaflet-control-attribution {
+    display: none !important;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.footer_text {
+    width: 400px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0468d2;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.leaflet-draw-actions>li>a {
+    background-color: #0066cc;
+}

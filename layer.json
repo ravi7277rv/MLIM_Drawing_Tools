@@ -1,0 +1,52 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "fid": 169,
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            76.201172,
+                            19.849394
+                        ],
+                        [
+                            76.201172,
+                            20.262197
+                        ],
+                        [
+                            77.211914,
+                            20.262197
+                        ],
+                        [
+                            77.211914,
+                            19.849394
+                        ],
+                        [
+                            76.201172,
+                            19.849394
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "Creator": "Raj",
+                "Name": "Kumar",
+                "Category": "Kumar",
+                "Timestamp": "1/6/2025, 12:08:46 PM"
+            }
+        }
+    ],
+    "users_details":{
+        "user_name":"raj@singh",
+        "user_role":"maker",
+        "zone":"CR",
+        "division":"CSTM",
+        "section":"PUNE",
+        "feature_status":"assigned_checker",
+        "assigned_to":"RajKumar",
+        "comment":""
+    }
+}
