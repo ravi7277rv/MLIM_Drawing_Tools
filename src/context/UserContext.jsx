@@ -16,6 +16,7 @@ export const UserProvider = ({ children }) => {
     const [updatedExportType, setUpdatedExortType] = useState(null);
     const [uploadedShapeFileId, setUploadedShapeFileId] = useState([]);
     const [newFeatureCreatedId, setNewFeatureCreatedId] = useState(null);
+    const [editedLayerLeafletId, setEditedLayerLeafletId] = useState([]);
     const [updatedExportFeatures, setUpdatedExportFeatures] = useState([]);
     const [uploadedShapeFilePath, setUploadedShapeFilePath] = useState("");
     const [lassoSelectedFeatureId, setLassoSelectedFeatureIds] = useState([]);
@@ -41,7 +42,7 @@ export const UserProvider = ({ children }) => {
     const handleLogout = async () => {
         const token = JSON.parse(sessionStorage.getItem('authToken'));
         try {
-             await fetch(`${baseURL}/logout`, {
+            await fetch(`${baseURL}/logout`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -57,11 +58,40 @@ export const UserProvider = ({ children }) => {
 
     // Handle Layer Clicked
     const handleLayerClicked = (e) => {
+        debugger
         let layer = e.target;
+        //  if (layer instanceof L.Polygon || layer instanceof L.Polyline || layer instanceof L.Circle || layer instanceof L.Rectangle) {
+        //       layer.setStyle({
+        //         color: "#780C28",
+        //         fillColor: "#780C28",
+        //         fillOpacity: 0.2,
+        //       });
+        //       layer.options.color = "#780C28";
+        //       layer.options.fillColor = "#780C28";
+        //       layer.options.fillOpacity = 0.2;
+        //     } else if (layer instanceof L.CircleMarker) {
+        //       layer.setStyle({
+        //         color: "#780C28",
+        //         fillColor: "#780C28",
+        //       });
+        //       layer.options.color = "#780C28";
+        //       layer.options.fillColor = "#780C28";
+        //     }
         let featureId = layer._leaflet_id;
         setNewFeatureCreatedId(featureId)
         setLayerClicked(true)
         setAddAttributeDiv(true)
+        const properties = layer.feature.properties;
+
+        // Format properties as an HTML table
+        let popupContent = "<table style='border-collapse: collapse; width: 100%;'>";
+        for (const key in properties) {
+            popupContent += `<tr><td style='border: 1px solid black; padding: 5px;'><b>${key}</b></td>
+                             <td style='border: 1px solid black; padding: 5px;'>${properties[key]}</td></tr>`;
+        }
+        popupContent += "</table>";
+
+        layer.bindPopup(popupContent).openPopup();
     }
 
     // Handle setting LoggedIn
@@ -77,7 +107,7 @@ export const UserProvider = ({ children }) => {
             groupedFeatures, setGroupedFeatures, updatedExportFeatures, setUpdatedExportFeatures, updatedExportType, setUpdatedExortType,
             layerClicked, setLayerClicked, handleLayerClicked, addAttributeDiv, setAddAttributeDiv, uploadedShapeFileId, setUploadedShapeFileId,
             uploadedShapeFilePath, setUploadedShapeFilePath, lassoSelectedFeatureType, setLassoSelectedFeatureType, lassoSelectedFeatureId,
-            setLassoSelectedFeatureIds, lassoToolFinishedSelection, setLassoToolFinishedSelection
+            setLassoSelectedFeatureIds, lassoToolFinishedSelection, setLassoToolFinishedSelection, editedLayerLeafletId, setEditedLayerLeafletId,
         }} >
             {children}
         </UserContext.Provider>

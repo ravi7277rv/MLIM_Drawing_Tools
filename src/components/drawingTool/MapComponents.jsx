@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { use, useContext, useEffect, useRef } from 'react'
 import { MapContainer, TileLayer, FeatureGroup, useMap } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import { toast } from 'react-toastify';
@@ -10,8 +10,7 @@ import "leaflet-lasso";
 import 'leaflet.markercluster';
 import UserContext from '../../context/UserContext';
 import { baseMaps, CustomBasemapControl } from './CustomBaseMapControl';
-import { REACT_API_NODE_URL } from '../../baseURL';
-
+import { layerColor } from './DrawingTools';
 
 
 export const AddLassoControl = ({ setAddAttributeDiv }) => {
@@ -88,7 +87,7 @@ export const AddLassoControl = ({ setAddAttributeDiv }) => {
     const resetSelectedState = () => {
       setAddAttributeDiv(false);
       setLassoToolFinishedSelection(false);
-    
+
       map.eachLayer((layer) => {
         if (layer instanceof L.Marker && !(layer instanceof L.MarkerCluster) && !layer.options.editing) {
           // Do not reset markers used for editing
@@ -97,7 +96,7 @@ export const AddLassoControl = ({ setAddAttributeDiv }) => {
           layer.setStyle({ color: "#3388ff", opacity: 0.6 });
         }
       });
-    
+
       setLassoSelectedFeatureIds([]);
       setLassoSelectedFeatureType([]);
     };
@@ -128,7 +127,7 @@ export const AddLassoControl = ({ setAddAttributeDiv }) => {
         }
         if (layer._leaflet_id) {
           selectedFeatureId.push(layer._leaflet_id);
-          if(!selectedFeatureType.includes(layerType)){
+          if (!selectedFeatureType.includes(layerType)) {
             selectedFeatureType.push(layerType);
           }
         }
@@ -171,8 +170,6 @@ export const AddLassoControl = ({ setAddAttributeDiv }) => {
   }, [])
 }
 
-
-
 const MapComponents = ({ setListAndBtnContainer }) => {
   const {
     mapRef,
@@ -185,17 +182,35 @@ const MapComponents = ({ setListAndBtnContainer }) => {
     setGroupedFeatures,
     handleLayerClicked,
     setAddAttributeDiv,
-    uploadedShapeFileId,
     setNewFeatureCreatedId,
-    setUploadedShapeFileId,
+    setEditedLayerLeafletId,
     setUpdatedExportFeatures,
   } = useContext(UserContext);
-  const baseURL = REACT_API_NODE_URL;
+  const drawControl = useRef();
+  // const baseURL = REACT_API_NODE_URL;
+  const END_POINT_NODE = process.env.NODE_URL
 
 
   // Handle Layer Created
   const _onCreated = async (e) => {
     const { layer, layerType } = e;
+    // if (layer instanceof L.Polygon || layer instanceof L.Polyline || layer instanceof L.Circle || layer instanceof L.Rectangle) {
+    //   layer.setStyle({
+    //     color: layerColor, // "#780C28",
+    //     fillColor: layerColor, // "#780C28",
+    //     fillOpacity: 0.2,
+    //   });
+    //   layer.options.color =  layerColor; //"#780C28";
+    //   layer.options.fillColor = layerColor; // "#780C28";
+    //   layer.options.fillOpacity = 0.2;
+    // } else if (layer instanceof L.CircleMarker) {
+    //   layer.setStyle({
+    //     color: layerColor, // "#780C28",
+    //     fillColor: layerColor, // "#780C28",
+    //   });
+    //   layer.options.color = layerColor; // "#780C28";
+    //   layer.options.fillColor = layerColor; // "#780C28";
+    // }
     layer.on('click', handleLayerClicked)
     const geometryType = getGeometryType(layerType);
     const leafletId = layer._leaflet_id;
@@ -237,7 +252,7 @@ const MapComponents = ({ setListAndBtnContainer }) => {
       const column = 'sketch_tool'
       const value = geometryType;
       try {
-        const response = await fetch(`${baseURL}/getExportToGeoJsonBtnStatus`, {
+        const response = await fetch(`${END_POINT_NODE}/getExportToGeoJsonBtnStatus`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -262,6 +277,12 @@ const MapComponents = ({ setListAndBtnContainer }) => {
       let leafletId = layer._leaflet_id;
       const updatedFeature = layer.toGeoJSON();
       const geometryType = updatedFeature.geometry.type;
+      setEditedLayerLeafletId(prev => {
+        if (!prev.some(item => item.id === leafletId)) {
+          return [...prev, { id: leafletId, type: geometryType }];
+        }
+        return prev;
+      });
       if (geometryType) {
         setGroupedFeatures((prevState) => {
           const updatedGroup = prevState[geometryType].map((feature) =>
@@ -316,21 +337,27 @@ const MapComponents = ({ setListAndBtnContainer }) => {
     }
   }, [groupedFeatures]);
 
-
   return (
     <>
-      <MapContainer center={['22.3511148', '78.6677428']} zoom={5} minZoom={5} style={{ height: '100%', width: '100%', }} ref={mapRef} >
-        <TileLayer url={baseMaps[0].url} attribution={baseMaps[0].attribution} />
+
+      <MapContainer center={['22.3511148', '78.6677428']} zoom={5} minZoom={5} maxZoom={21} style={{ height: '100%', width: '100%', }} ref={mapRef} >
+        <TileLayer url={baseMaps[0].url} attribution={baseMaps[0].attribution}  maxZoom={21} maxNativeZoom={21}/>
         <AddLassoControl setAddAttributeDiv={setAddAttributeDiv}></AddLassoControl>
         <CustomBasemapControl defaultBaseMap={baseMaps[0]} position="bottomleft" />
         <FeatureGroup ref={featureGroupRef}>
-          <EditControl
+          <EditControl ref={drawControl}
+
             position="topright"
             onCreated={_onCreated}
             onDeleted={_onDeleted}
             onEdited={_onEdited}
             draw={{
-              rectangle: true, polygon: true, polyline: true, circle: true, circlemarker: true, marker: true
+              rectangle: true,
+              polygon: true,
+              polyline: true,
+              circle: true,
+              circlemarker: true,
+              marker: true
             }}
             edit={{ edit: true, remove: true, }}
           />

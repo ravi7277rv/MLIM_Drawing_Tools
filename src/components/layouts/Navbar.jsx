@@ -38,6 +38,7 @@ const Navbar = () => {
                 <span className="header_text">Online Drawing Tools</span>
             </div>
             <div className="user_profile" id="userProfile" onClick={handleProfileDropdown}>
+            
                 <div className="profile_Div" id="profileDiv" ref={dropdownRef}>
                     <svg className="person_svg" fill="#0066cc" width="30px" height="30px" viewBox="0 0 32 32"
                         xmlns="http://www.w3.org/2000/svg">

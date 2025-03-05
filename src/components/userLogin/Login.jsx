@@ -4,10 +4,9 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
-import { REACT_API_NODE_URL } from '../../baseURL';
 const Login = () => {
     let toastId = null;
-    const baseURL = REACT_API_NODE_URL
+    const END_POINT_NODE = process.env.REACT_APP_NODE_API
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [userpassword, setUserpassword] = useState('');
@@ -15,6 +14,7 @@ const Login = () => {
 
     //handling the user login with the valid credentials
     const handleUserLogin = async (e) => {
+        debugger
         e.preventDefault();
         if (username.trim() === "" || userpassword.trim() === "") {
             if (!toast.isActive(toastId)) {
@@ -27,7 +27,7 @@ const Login = () => {
             return;
         }
         try {
-            const response = await fetch(`${baseURL}/userLogin`, {
+            const response = await fetch(`${END_POINT_NODE}/userLogin`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const Login = () => {
 
             const token = result.token;
             if (token) {
-                // localStorage.setItem("authToken", JSON.stringify(token));
+                localStorage.setItem("authToken", JSON.stringify(token));
                 sessionStorage.setItem("authToken", JSON.stringify(token));
                 setIsLoggedIn(true); // Set login state
                 navigate('/drawing-tool'); // Redirect to another route

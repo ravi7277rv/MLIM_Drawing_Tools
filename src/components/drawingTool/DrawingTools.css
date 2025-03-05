@@ -7,33 +7,33 @@
 .leaflet-div-icon {
     width: 13px !important;
     height: 13px !important;
-    background-color: #006aff; 
+    background-color: #006aff;
     border-radius: 6px;
     margin-left: -5px !important;
     margin-top: -4px !important;
 }
 
-.leaflet-right{
+.leaflet-right {
     display: flex !important;
 }
 
 .leaflet-right .leaflet-control {
     display: flex;
-    
+
 }
 
-.lasso_label{
+.lasso_label {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.lasso_text{
+.lasso_text {
     cursor: pointer;
 }
 
 .leaflet-bar {
-margin-right: 3px !important;
+    margin-right: 3px !important;
 }
 
 .leaflet-draw {
@@ -120,7 +120,45 @@ margin-right: 3px !important;
     border-radius: 4px;
 }
 
-.import_shape_file {
+.upload_layer_btn {
+    padding: 10px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.upload_layer_div {
+    position: absolute;
+    top: 38px;
+    right: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 350px;
+    height: max-content;
+    padding: 10px;
+    background: white;
+    box-shadow: 4px 4px 5px silver;
+    border: 1px solid silver;
+    border-radius: 5px;
+}
+.upload_layer_div_for_btn{
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.shapefile_upload_div {
+    width: max-content;
+    height: max-content;
+}
+
+.import_shape_file_btn {
     background-color: #0066cc;
     color: white;
     padding: 7px 7px;
@@ -128,6 +166,97 @@ margin-right: 3px !important;
     text-decoration: none;
     display: inline-block;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.upload_db_layer_btn {
+    padding: 10px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 18px;
+}
+
+.database_layerupload_div {
+    margin-top: 10px;
+    height: max-content;
+}
+
+.dropdownBtnDiv{
+    position: relative;
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.label_division{
+    width: 35px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 15px;
+}
+
+.division_selection_btn{
+    width: 210px;
+    padding: 7px 20px 7px 20px;
+    background: no-repeat;
+    border: 1px solid silver;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-left: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.division_dropdown_div{
+    padding: 8px 4px 8px 6px;
+    width: 195px;
+    height: max-content;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    box-shadow: 0 0 5px silver;
+    right: 6px;
+    top: 47px;
+    border: 1px solid silver;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.division_dropdown_div>label{
+    margin: 1px 0;
+    padding: 5px 5px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.division_dropdown_div>label:hover{
+background-color: silver;
+}
+
+.load_layer_btn_div{
+    width: 100%;
+    height: max-content;
+    padding: 4px 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.load_layer_btn{
+    padding: 10px;
+    background-color: #196fca;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 5px;
     cursor: pointer;
 }
 
@@ -198,4 +327,26 @@ margin-right: 3px !important;
 
 .leaflet-draw-actions>li>a {
     background-color: #0066cc;
+}
+
+.colorPiker {
+    position: absolute;
+    top: 12px;
+    right: 556px;
+    z-index: 999;
+}
+
+.colorPiker>input {
+    height: 32px;
+    cursor: pointer;
+}
+
+.loader_div{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
 }
